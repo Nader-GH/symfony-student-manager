@@ -1,0 +1,41 @@
+{% extends 'layout/app.html.twig' %}
+
+{% block page_title %}Mon profil{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>Informations</h6>
+                <p class="mb-1"><strong>Username:</strong> {{ user.username }}</p>
+                <p class="mb-0"><strong>Role:</strong> {{ role_label(user.role) }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>Changer le mot de passe</h6>
+                {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+                {% if success %}<div class="alert alert-success">{{ success }}</div>{% endif %}
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Mot de passe actuel</label>
+                        <input type="password" name="current_password" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nouveau mot de passe</label>
+                        <input type="password" name="new_password" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirmer</label>
+                        <input type="password" name="confirm_password" class="form-control" required>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Mettre a jour</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

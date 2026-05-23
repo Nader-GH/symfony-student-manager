@@ -1,8 +1,7 @@
 /vendor/
-/composer.lock
-.env
-.env.local
-/.vscode
-/.idea
-*.log
-.DS_Store
+/composer.phar
+/composer-setup.php
+/database.sqlite
+/.sessions/
+/assets/uploads/*
+!/assets/uploads/.gitkeep

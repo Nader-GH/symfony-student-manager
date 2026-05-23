@@ -1,0 +1,32 @@
+{% extends 'layout/app.html.twig' %}
+
+{% block page_title %}{{ isEdit ? 'Modifier' : 'Ajouter' }} un compte{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+        <form method="post" autocomplete="off">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" value="{{ account.username }}" required>
+                <div class="form-text">Minimum 3 caracteres.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Role</label>
+                <select name="role" class="form-select" required>
+                    <option value="user" {{ account.role == 'user' ? 'selected' : '' }}>User (consultation)</option>
+                    <option value="teacher" {{ account.role in ['teacher', 'admin'] ? 'selected' : '' }}>Teacher</option>
+                    <option value="super_admin" {{ account.role == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Mot de passe{{ isEdit ? ' (vide = inchangé)' : '' }}</label>
+                <input type="password" name="password" class="form-control" {{ isEdit ? '' : 'required' }}>
+            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <a href="{{ url('users_list') }}" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

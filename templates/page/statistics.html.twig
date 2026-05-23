@@ -1,0 +1,69 @@
+{% extends 'layout/app.html.twig' %}
+
+{% block page_title %}Statistiques{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card stat-card">
+            <div class="card-body">
+                <div class="text-muted small">Total etudiants</div>
+                <div class="fs-2 fw-bold">{{ totalStudents }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card stat-card">
+            <div class="card-body">
+                <div class="text-muted small">Age moyen</div>
+                <div class="fs-2 fw-bold">{{ averageAge }} ans</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header">Repartition par section</div>
+    <div class="card-body">
+        {% for row in rows %}
+            <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                    <span>{{ row.label }}</span>
+                    <strong>{{ row.total }}</strong>
+                </div>
+                <div class="progress" style="height: 1.25rem;">
+                    <div class="progress-bar" style="width: {{ (row.total / max * 100)|round }}%">
+                        {{ row.total }}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p class="text-muted mb-0">Aucune donnee disponible.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="card shadow-sm mt-4">
+    <div class="card-header">Age moyen par section</div>
+    <div class="card-body">
+        <table class="table table-striped mb-0">
+            <thead>
+                <tr>
+                    <th>Section</th>
+                    <th>Etudiants</th>
+                    <th>Age moyen</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in ageBySection %}
+                    <tr>
+                        <td>{{ row.label }}</td>
+                        <td>{{ row.count }}</td>
+                        <td>{{ row.average }} ans</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

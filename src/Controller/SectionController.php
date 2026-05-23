@@ -1,41 +1,87 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
-class SectionController {
-    
-    public function list() {
-        $search = $_GET['search'] ?? '';
-        $dataFile = __DIR__ . '/../../data/sections.json';
+use App\Entity\Section;
 
-        if (!file_exists($dataFile)) {
-            return 'Data not initialized. Please run: php init_db.php';
+final class SectionController extends AbstractController
+{
+    public function list(): void
+    {
+        $this->app->requireAuth();
+        $q = trim($_GET['q'] ?? '');
+
+        $qb = $this->em()->createQueryBuilder()
+            ->select('s', 'e')
+            ->from(Section::class, 's')
+            ->leftJoin('s.etudiants', 'e')
+            ->orderBy('s.id', 'DESC');
+
+        if ($q !== '') {
+            $qb->andWhere('s.designation LIKE :q OR s.description LIKE :q')
+                ->setParameter('q', '%' . $q . '%');
         }
 
-        // Load sections from JSON
-        $json = file_get_contents($dataFile);
-        $sections = json_decode($json, true) ?: [];
+        $this->render('section/list.html.twig', [
+            'sections' => $qb->getQuery()->getResult(),
+            'q' => $q,
+        ]);
+    }
 
-        // Filter by search term
-        if (!empty($search)) {
-            $sections = array_filter($sections, function($section) use ($search) {
-                $searchLower = strtolower($search);
-                return (
-                    stripos($section['designation'], $search) !== false ||
-                    stripos($section['level'], $search) !== false
-                );
-            });
-            $sections = array_values($sections); // Re-index array
+    public function form(): void
+    {
+        $this->app->requireTeacher();
+        $id = (int)($_GET['id'] ?? 0);
+        $isEdit = $id > 0;
+        $error = '';
+
+        $section = $isEdit ? $this->em()->find(Section::class, $id) : new Section();
+        if ($isEdit && $section === null) {
+            http_response_code(404);
+            $this->render('page/not_found.html.twig', ['route' => 'section']);
+
+            return;
         }
 
-        // Sort by designation
-        usort($sections, function($a, $b) {
-            return strcmp($a['designation'], $b['designation']);
-        });
+        if (!$section instanceof Section) {
+            $section = new Section();
+        }
 
-        // Render template
-        ob_start();
-        require __DIR__ . '/../../templates/section/list.html.twig.php';
-        return ob_get_clean();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $designation = trim($_POST['designation'] ?? '');
+            $description = trim($_POST['description'] ?? '');
+
+            if ($designation === '' || $description === '') {
+                $error = 'Tous les champs sont obligatoires.';
+            } else {
+                $section->setDesignation($designation);
+                $section->setDescription($description);
+                if (!$isEdit) {
+                    $this->em()->persist($section);
+                }
+                $this->em()->flush();
+                $this->redirect('sections_list');
+            }
+        }
+
+        $this->render('section/form.html.twig', [
+            'section' => $section,
+            'isEdit' => $isEdit,
+            'error' => $error,
+        ]);
+    }
+
+    public function delete(): void
+    {
+        $this->app->requireTeacher();
+        $id = (int)($_GET['id'] ?? 0);
+        $section = $this->em()->find(Section::class, $id);
+        if ($section !== null) {
+            $this->em()->remove($section);
+            $this->em()->flush();
+        }
+        $this->redirect('sections_list');
     }
 }

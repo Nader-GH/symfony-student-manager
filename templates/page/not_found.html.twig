@@ -1,0 +1,11 @@
+{% extends 'layout/app.html.twig' %}
+
+{% block page_title %}Introuvable{% endblock %}
+
+{% block content %}
+<div class="alert alert-warning">
+    <h5>404 — Ressource introuvable</h5>
+    <p class="mb-0">La ressource demandee n'existe pas.</p>
+</div>
+<a href="{{ url('home') }}" class="btn btn-secondary">Retour</a>
+{% endblock %}

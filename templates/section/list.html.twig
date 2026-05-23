@@ -1,0 +1,70 @@
+{% extends 'layout/app.html.twig' %}
+
+{% block page_title %}Liste des sections{% endblock %}
+
+{% block content %}
+<form method="get" action="{{ url('sections_list') }}" class="row g-2 mb-3">
+    <div class="col-md-6">
+        <input type="text" name="q" class="form-control" placeholder="Rechercher une section..."
+               value="{{ q|default('') }}">
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+        {% if q|default('') != '' %}
+            <a href="{{ url('sections_list') }}" class="btn btn-outline-secondary">Effacer</a>
+        {% endif %}
+    </div>
+</form>
+
+<div class="d-flex justify-content-end mb-3">
+    {% if is_teacher() %}
+        <a href="{{ url('section_form') }}" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Ajouter section
+        </a>
+    {% endif %}
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <table id="sectionsTable" class="display table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Designation</th>
+                    <th>Description</th>
+                    <th>Etudiants</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for section in sections %}
+                    <tr>
+                        <td>{{ section.id }}</td>
+                        <td>{{ section.designation }}</td>
+                        <td>{{ section.description }}</td>
+                        <td>{{ section.etudiants|length }}</td>
+                        <td>
+                            <a href="{{ url('students_list', {section_id: section.id}) }}" class="btn btn-sm btn-info" title="Voir etudiants">
+                                <i class="fa-solid fa-users"></i>
+                            </a>
+                            {% if is_teacher() %}
+                                <a href="{{ url('section_form', {id: section.id}) }}" class="btn btn-sm btn-warning">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a href="{{ url('section_delete', {id: section.id}) }}" class="btn btn-sm btn-danger"
+                                   onclick="return confirm('Supprimer cette section ?');">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>$(function () { $('#sectionsTable').DataTable({ pageLength: 5 }); });</script>
+{% endblock %}

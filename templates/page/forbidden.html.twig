@@ -1,0 +1,11 @@
+{% extends 'layout/app.html.twig' %}
+
+{% block page_title %}Acces refuse{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger">
+    <h5>403 — Acces refuse</h5>
+    <p class="mb-0">{{ message }}</p>
+</div>
+<a href="{{ url('home') }}" class="btn btn-secondary">Retour a l'accueil</a>
+{% endblock %}

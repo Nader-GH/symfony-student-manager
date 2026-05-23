@@ -1,0 +1,46 @@
+{% extends 'layout/app.html.twig' %}
+
+{% block page_title %}{{ isEdit ? 'Modifier' : 'Ajouter' }} un etudiant{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label">Nom</label>
+                <input type="text" name="nom" class="form-control" value="{{ student.nom }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Date de naissance</label>
+                <input type="date" name="date_naissance" class="form-control"
+                       value="{{ student.id ? student.dateNaissance|date('Y-m-d') : '' }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Section</label>
+                <select name="section_id" class="form-select" required>
+                    <option value="">Choisir une section</option>
+                    {% for section in sections %}
+                        <option value="{{ section.id }}"
+                            {% if student.id and student.section.id == section.id %}selected{% endif %}>
+                            {{ section.designation }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Image</label>
+                <input type="file" name="image" class="form-control" accept=".jpg,.jpeg,.png,.gif,.webp">
+                {% if student.image %}
+                    <img src="{{ student.image }}" alt="photo" class="mt-2" style="max-width: 120px; border-radius: 8px;">
+                {% endif %}
+            </div>
+            <button class="btn btn-success" type="submit">Enregistrer</button>
+            <a href="{{ url('students_list') }}" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

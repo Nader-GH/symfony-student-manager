@@ -1,0 +1,18 @@
+{% extends 'layout/app.html.twig' %}
+
+{% block page_title %}Aide{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5>Guide rapide</h5>
+        <ul>
+            <li><strong>User</strong> — consultation des listes et statistiques.</li>
+            <li><strong>Teacher</strong> — CRUD etudiants, sections et annonces.</li>
+            <li><strong>Super Admin</strong> — gestion des comptes utilisateurs.</li>
+        </ul>
+        <h6 class="mt-4">Technologies</h6>
+        <p class="mb-0">PHP, Doctrine ORM, Twig, Symfony Security (roles + hash), SQLite, Bootstrap, DataTables.</p>
+    </div>
+</div>
+{% endblock %}

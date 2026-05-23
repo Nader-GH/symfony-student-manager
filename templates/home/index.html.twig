@@ -1,0 +1,29 @@
+{% extends 'layout/app.html.twig' %}
+
+{% block page_title %}Accueil{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title">Bienvenue, {{ app_user.username }} !</h4>
+                <p class="card-text">Application de gestion des etudiants avec Doctrine ORM et Twig.</p>
+                <p class="mb-0">Utilisez la barre laterale pour naviguer entre les modules.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>Raccourcis</h6>
+                <div class="d-grid gap-2">
+                    <a href="{{ url('dashboard') }}" class="btn btn-outline-primary btn-sm">Tableau de bord</a>
+                    <a href="{{ url('students_list') }}" class="btn btn-outline-primary btn-sm">Liste etudiants</a>
+                    <a href="{{ url('announcements_list') }}" class="btn btn-outline-primary btn-sm">Annonces</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
