@@ -141,9 +141,11 @@
                     </option>
                 <?php endforeach; ?>
             </select>
+            <input type="text" name="search" placeholder="Search by name or email..." 
+                   value="<?php echo htmlspecialchars($searchTerm); ?>" style="padding: 10px 15px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
             <button type="submit">Filter</button>
-            <?php if (!empty($sectionFilter)): ?>
-                <a href="?"><button type="button" class="clear-btn">Clear Filter</button></a>
+            <?php if (!empty($sectionFilter) || !empty($searchTerm)): ?>
+                <a href="?"><button type="button" class="clear-btn">Clear</button></a>
             <?php endif; ?>
         </form>
         
@@ -156,6 +158,9 @@
                 ?>
                     in "<?php echo htmlspecialchars($selectedSection['designation']); ?>"
                 <?php endif; endif; ?>
+                <?php if (!empty($searchTerm)): ?>
+                    matching "<?php echo htmlspecialchars($searchTerm); ?>"
+                <?php endif; ?>
             </div>
             
             <table>
@@ -195,8 +200,8 @@
             </table>
         <?php else: ?>
             <div class="no-results">
-                <?php if (!empty($sectionFilter)): ?>
-                    No students found in this section
+                <?php if (!empty($sectionFilter) || !empty($searchTerm)): ?>
+                    No students found matching your filters
                 <?php else: ?>
                     No students available
                 <?php endif; ?>

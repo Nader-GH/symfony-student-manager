@@ -6,6 +6,7 @@ class StudentController {
     
     public function list() {
         $sectionFilter = $_GET['section'] ?? '';
+        $searchTerm = $_GET['search'] ?? '';
         $dataFile = __DIR__ . '/../../data/students.json';
         $sectionsFile = __DIR__ . '/../../data/sections.json';
 
@@ -28,6 +29,18 @@ class StudentController {
         if (!empty($sectionFilter)) {
             $students = array_filter($students, function($student) use ($sectionFilter) {
                 return (string)$student['section_id'] === (string)$sectionFilter;
+            });
+            $students = array_values($students); // Re-index array
+        }
+
+        // Filter by search term if specified
+        if (!empty($searchTerm)) {
+            $students = array_filter($students, function($student) use ($searchTerm) {
+                return (
+                    stripos($student['first_name'], $searchTerm) !== false ||
+                    stripos($student['last_name'], $searchTerm) !== false ||
+                    stripos($student['email'], $searchTerm) !== false
+                );
             });
             $students = array_values($students); // Re-index array
         }
