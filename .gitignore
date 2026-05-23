@@ -1,28 +1,8 @@
-# Symfony
 /vendor/
-/bin/
-/var/cache/*
-!/var/cache/.gitkeep
-/var/log/*
-!/var/log/.gitkeep
-/var/sessions/*
-!/var/sessions/.gitkeep
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Environment
+/composer.lock
 .env
 .env.local
-.env.*.local
-
-# Composer
-composer.lock
+/.vscode
+/.idea
+*.log
+.DS_Store

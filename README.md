@@ -1,15 +1,15 @@
 # Symfony Student Manager
 
-A Symfony-based student management system.
+A web application for managing students using Symfony, Doctrine ORM, and Twig.
 
-## Installation
-
+## Setup
 ```bash
 composer install
+php init_db.php
+php -S localhost:8000
 ```
 
-## Usage
-
-```bash
-symfony server:start
-```
+## Demo Accounts
+- superadmin / super123
+- teacher / teacher123
+- user1 / user123
