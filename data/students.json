@@ -1,0 +1,83 @@
+[
+    {
+        "id": 1,
+        "first_name": "Ahmed",
+        "last_name": "Hassan",
+        "email": "ahmed.hassan@school.edu",
+        "phone": "+20-123-456-7890",
+        "section_id": 1,
+        "created_at": "2024-01-15 08:30:00"
+    },
+    {
+        "id": 2,
+        "first_name": "Fatima",
+        "last_name": "Ali",
+        "email": "fatima.ali@school.edu",
+        "phone": "+20-123-456-7891",
+        "section_id": 1,
+        "created_at": "2024-01-15 09:00:00"
+    },
+    {
+        "id": 3,
+        "first_name": "Mohammed",
+        "last_name": "Ibrahim",
+        "email": "mohammed.ibrahim@school.edu",
+        "phone": "+20-123-456-7892",
+        "section_id": 1,
+        "created_at": "2024-01-15 09:30:00"
+    },
+    {
+        "id": 4,
+        "first_name": "Noor",
+        "last_name": "Khan",
+        "email": "noor.khan@school.edu",
+        "phone": "+20-123-456-7893",
+        "section_id": 2,
+        "created_at": "2024-01-15 10:00:00"
+    },
+    {
+        "id": 5,
+        "first_name": "Layla",
+        "last_name": "Mahmoud",
+        "email": "layla.mahmoud@school.edu",
+        "phone": "+20-123-456-7894",
+        "section_id": 2,
+        "created_at": "2024-01-15 10:30:00"
+    },
+    {
+        "id": 6,
+        "first_name": "Hassan",
+        "last_name": "Omar",
+        "email": "hassan.omar@school.edu",
+        "phone": "+20-123-456-7895",
+        "section_id": 2,
+        "created_at": "2024-01-15 11:00:00"
+    },
+    {
+        "id": 7,
+        "first_name": "Amira",
+        "last_name": "Youssef",
+        "email": "amira.youssef@school.edu",
+        "phone": "+20-123-456-7896",
+        "section_id": 3,
+        "created_at": "2024-01-15 11:30:00"
+    },
+    {
+        "id": 8,
+        "first_name": "Karim",
+        "last_name": "Mohamed",
+        "email": "karim.mohamed@school.edu",
+        "phone": "+20-123-456-7897",
+        "section_id": 3,
+        "created_at": "2024-01-15 12:00:00"
+    },
+    {
+        "id": 9,
+        "first_name": "Sara",
+        "last_name": "Ahmed",
+        "email": "sara.ahmed@school.edu",
+        "phone": "+20-123-456-7898",
+        "section_id": 3,
+        "created_at": "2024-01-15 12:30:00"
+    }
+]
