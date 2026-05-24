@@ -22,7 +22,7 @@ $userRepo = $em->getRepository(User::class);
 $seedUsers = [
     ['username' => 'superadmin', 'password' => 'super123', 'role' => 'super_admin'],
     ['username' => 'teacher', 'password' => 'teacher123', 'role' => 'teacher'],
-    ['username' => 'user1', 'password' => 'user123', 'role' => 'user'],
+    ['username' => 'Abdellah Idriss', 'password' => 'user123', 'role' => 'user'],
 ];
 
 foreach ($seedUsers as $data) {
@@ -57,9 +57,9 @@ if ($em->getRepository(Section::class)->count([]) === 0) {
     $em->flush();
 
     $studentsData = [
-        ['nom' => 'Ahmed Ben Ali', 'date' => '2004-05-12', 'section' => 0],
-        ['nom' => 'Yasmine Trabelsi', 'date' => '2005-11-03', 'section' => 0],
-        ['nom' => 'Sami Gharbi', 'date' => '2006-08-21', 'section' => 1],
+        ['nom' => 'Ahmed Mohsen', 'date' => '2004-05-12', 'section' => 0],
+        ['nom' => 'Adelrazegh Mounib', 'date' => '2005-11-03', 'section' => 0],
+        ['nom' => 'Abdellah Idriss', 'date' => '2006-08-21', 'section' => 1],
     ];
 
     foreach ($studentsData as $data) {
@@ -94,5 +94,5 @@ if ($em->getRepository(Announcement::class)->count([]) === 0) {
 echo "Database initialized (Doctrine schema + seeds).\n";
 echo "Super Admin: superadmin / super123\n";
 echo "Teacher: teacher / teacher123\n";
-echo "User: user1 / user123\n";
+echo "User: Abdellah Idriss / user123\n";
 echo "Open: http://localhost:8000/index.php?r=login\n";

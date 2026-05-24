@@ -9,6 +9,16 @@ if (isset($_GET['r'])) {
     exit;
 }
 
+if (isset($_GET['section_id'])) {
+    app()->handle('students_list');
+    exit;
+}
+
+if (isset($_GET['q'])) {
+    app()->handle('sections_list');
+    exit;
+}
+
 if (app()->isLoggedIn()) {
     app()->redirect('dashboard');
 }

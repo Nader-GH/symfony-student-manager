@@ -1,6 +1,6 @@
 # Symfony Student Manager
 
-A web application for managing students using Symfony, Doctrine ORM, and Twig.
+A web application for managing students for web developement project .
 
 ## Setup
 ```bash
@@ -12,4 +12,4 @@ php -S localhost:8000
 ## Demo Accounts
 - superadmin / super123
 - teacher / teacher123
-- user1 / user123
+- Abdellah Idriss / user123
