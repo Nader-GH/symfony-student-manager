@@ -5,3 +5,5 @@
 /.sessions/
 /assets/uploads/*
 !/assets/uploads/.gitkeep
+.vercel
+.env*
